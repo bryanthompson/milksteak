@@ -4,6 +4,7 @@ require "sinatra/base"
 module Milksteak
   class Admin < Sinatra::Base
     set :views, File.join(File.dirname(__FILE__), "views")
+    set :public_folder, File.join(File.dirname(__FILE__), "public")
 
     helpers do
       def h(s); ERB::Util.h(s); end

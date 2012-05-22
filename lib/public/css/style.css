@@ -1,0 +1,8 @@
+.highlight { background: #fab; }
+footer { text-align: center; font-size: 0.7em; color: #e0e0e0; }
+ul.error-messages { 
+  margin: 0px;
+}
+tbody tr td {
+    line-height: 2em;
+}
