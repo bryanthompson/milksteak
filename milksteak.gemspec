@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
 require "milksteak/version"
+require "milksteak/cms"
 
 Gem::Specification.new do |s|
   s.name        = "milksteak"
@@ -24,4 +25,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "webmock"
   s.add_development_dependency "rack-test"
   s.add_runtime_dependency "tonic-cms"
+  s.add_runtime_dependency "sinatra"
 end
