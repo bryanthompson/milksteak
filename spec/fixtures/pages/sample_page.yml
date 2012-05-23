@@ -1,5 +1,6 @@
 ---
 description: This is just a test.
+route: /test-page
 ---
 
 This is some test content. {{description}}

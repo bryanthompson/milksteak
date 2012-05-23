@@ -9,7 +9,10 @@ module Milksteak
     # to put this into another method activerecord-style
     
     def self.write(name, params = {}, content)
+      raise NoRouteException unless params["route"]
       super
     end
   end
+  
+  class NoRouteException < Exception; end
 end

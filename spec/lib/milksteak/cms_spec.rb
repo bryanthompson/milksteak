@@ -24,6 +24,25 @@ describe Milksteak do
 end
 
 describe Milksteak::Cms do
-  it "should pull list of pages and process routes"
-  it "should find and route an existing page with an appropriate route"
+  before :all do
+    Milksteak::Cms.class_eval("@@pages").should == []
+    Milksteak::Page.should_receive(:list).and_return ["./spec/fixtures/pages/sample_page.yml"]
+    f = File.open(File.join(File.dirname(__FILE__), "../../fixtures/pages/sample_page.yml"), "r")
+    File.should_receive(:new).with("/tmp/milk_site/pages/sample_page.yml", "r").and_return f
+    @a = Milksteak::Cms.new(Sinatra::Application)
+    @a.load_pages
+  end
+
+  it "should pull list of pages and process routes" do
+    pages = Milksteak::Cms.class_eval("@@pages")
+    pages.length.should == 1
+    pages[0].data["route"].should == "/test-page"
+  end
+
+  pending "should find and route an existing page with an appropriate route" do
+    page = @a.route("/test-page")
+    pages.data["route"].should == "/test-page"
+  end
+  
+  it "should not find a page for a non-existant route"
 end
