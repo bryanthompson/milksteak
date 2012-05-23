@@ -12,7 +12,7 @@ In your site's config, make sure milksteak is being required, then set your milk
 
 If you plan on using the Milksteak::Admin module, include it in your rack cascade.  Here's an example, but you might need to figure out an alternative way if using rails or some other setup:
 
-    Rack::Cascade.new [Sinatra::Application, Milksteak::Admin]
+    rack
 
 # Usage
 
@@ -20,7 +20,9 @@ There are several ways to use Milksteak for content management.  The simplest ex
 
 ## views/sidebar.erb
 
-    <%= Milksteak::Page.render("sidebar-content") %>
+<code>
+<%= Milksteak::Page.render("sidebar-content") %>
+</code>
 
 ## milk/pages/sidebar-content.yml
 
