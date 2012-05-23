@@ -12,8 +12,14 @@ module Milksteak
     
     # loads a page from yaml, sets data and content attributes, returns a Milksteak::Page
     def self.load(name, mode = "r")
-      page_dir = File.join(Milksteak::Admin.milk_root, "pages", "#{name}.yml")
+      milk_root = Milksteak::Admin.milk_root
+      page_dir = File.join(Milksteak::Admin.milk_root, "pages")
+      FileUtils.mkdir(milk_root) unless File.exist? milk_root
+      FileUtils.mkdir(page_dir) unless File.exist? page_dir
+
+      page_dir = File.join(page_dir, "#{name}.yml")
       f = File.exist?(page_dir) ? File.open(page_dir, mode) : File.new(page_dir, mode)
+
       p = self.new
       p.name = name
       p.file = f
@@ -32,13 +38,21 @@ module Milksteak
     end  
   
     def self.render(name)
-      p = self.load(name, "r")
-      
-      p.content
+      begin
+        p = self.load(name, "r")
+        rendered = Liquid::Template.parse(p.content).render(p.data)
+        BlueCloth.new(rendered).to_html
+      rescue Errno::ENOENT => e
+        ""
+      end
     end  
 
     def write_yaml
-      self.file.write(YAML.dump(self.data))
+      if self.data.empty?
+        self.file.write("---\n")
+      else
+        self.file.write(YAML.dump(self.data))
+      end
       self.file.write("---\n\n")
       self.file.write(self.content)
     end

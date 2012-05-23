@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   #going to a simple flat-file storage for now
   #s.add_runtime_dependency "tonic-cms"
  
-  s.add_runtime_dependency "kyoto_record"
- 
+  s.add_runtime_dependency "liquid"
+  s.add_runtime_dependency "BlueCloth"
   s.add_runtime_dependency "sinatra"
 end

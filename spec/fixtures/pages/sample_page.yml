@@ -2,4 +2,4 @@
 description: This is just a test.
 ---
 
-This is some test content.
+This is some test content. {{description}}

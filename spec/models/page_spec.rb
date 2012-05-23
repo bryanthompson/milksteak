@@ -20,7 +20,7 @@ describe Milksteak::Page do
     page = Milksteak::Page.load("home", "r")
     page.should be_a Milksteak::Page
     page.data.should == { "description" => "This is just a test." }
-    page.content.should == "This is some test content.\n"
+    page.content.should == "This is some test content. {{description}}\n"
   end
   
   it "should write a page with contents in params" do
@@ -29,13 +29,29 @@ describe Milksteak::Page do
     page = Milksteak::Page.write("home", { "description" => "TEST PAGE"}, "TEST CONTENT")
     page.data.should == { "description" => "TEST PAGE" }
     page.content.should == "TEST CONTENT"
+    File.unlink(File.join(File.dirname(__FILE__), "../fixtures/pages/scratch_page.yml"))
   end
 
   it "should render page content" do
     f = File.open(File.join(File.dirname(__FILE__), "../fixtures/pages/sample_page.yml"), "r")
     File.should_receive(:new).with("/tmp/milk_site/pages/home.yml", "r").and_return f
     content = Milksteak::Page.render("home")
-    pp content
+    content.should == "<p>This is some test content. This is just a test.</p>"
+  end
+
+  it "should return empty string if trying to render a page that doesn't exist" do
+    FileUtils.stub(:mkdir).and_return true
+    empty = Milksteak::Page.render("home")
+    empty.should == ""
+  end
+  
+  it "should accept an empty hash" do
+    f = File.new(File.join(File.dirname(__FILE__), "../fixtures/pages/scratch_page.yml"), "w+")
+    File.should_receive(:new).with("/tmp/milk_site/pages/home.yml", "w+").and_return f
+    page = Milksteak::Page.write("home", {}, "TEST CONTENT")
+    page.data.should == {}
+    page.content.should == "TEST CONTENT"
+    File.unlink(File.join(File.dirname(__FILE__), "../fixtures/pages/scratch_page.yml"))
   end
 
   it "should route pages using middleware"

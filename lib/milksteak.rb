@@ -1,6 +1,9 @@
 require "milksteak/version"
 require "sinatra/base"
 require "models/user"
+require "models/page"
+require "liquid"
+require "bluecloth"
 
 module Milksteak
   class Admin < Sinatra::Base
