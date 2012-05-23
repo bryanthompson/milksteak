@@ -1,5 +1,7 @@
 module Milksteak
   class Page
+    attr_accessor :data, :content, :output
+
     def self.list
       milk_root = Milksteak::Admin.milk_root
       page_dir = File.join(Milksteak::Admin.milk_root, "pages")
@@ -8,23 +10,30 @@ module Milksteak
       Dir.glob("#{page_dir}/*.yml")
     end
     
-    def self.open(name, mode = "r")
+    # loads a page from yaml, sets data and content attributes, returns a Milksteak::Page
+    def self.load(name, mode = "r")
       page_dir = File.join(Milksteak::Admin.milk_root, "pages", "#{name}.yml")
-      if File.exist?(page_dir)
-        f = File.open(page_dir, mode)
-      else
-        f = File.new(page_dir, mode)
-      end
-      f
+      f = File.exist?(page_dir) ? File.open(page_dir, mode) : File.new(page_dir, mode)
+      p = self.new
+      p.read_yaml(name, f)
+      p
     end
     
-    # reads a page into parsed params.  Pages are set up as yaml on top and
-    # content below, parsed as liquid.  jekyll style.
-    def self.read(name)
-    end
-
     # writes params into a page.  
     def self.write(name, params = {})
     end  
+
+    def read_yaml(name, file)
+      self.content = file.read
+      begin
+        if self.content =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
+          self.content = $POSTMATCH
+          self.data = YAML.load($1)
+        end
+      rescue => e
+        puts "YAML Exception reading #{name}: #{e.message}"
+      end
+      self.data ||= {}
+    end
   end
 end
