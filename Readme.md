@@ -1,4 +1,14 @@
-# Installation
+Milksteak is a little experiment in tiny-cms-land.  My goal with it is to build the minimum structure necessary 
+and keep it as far from anything like rails as possible, with minimum requirements, fast tests, and simple 
+structure.  Expect the project to change rather dramatically as I add to it, feel free to fork and do whatever
+you like, and as always, pull requests are very welcome.  
+
+License
+
+Refinery is released under the MIT license and is copyright (c) 2005-2012 Resolve Digital
+Credits
+
+Many of the icons used in Refinery CMS are from the wonderful Silk library by Mark James.# Installation
 
     gem install milksteak 
     gem 'milksteak' # if using bundler
@@ -35,3 +45,6 @@ text to be editable.
     
     Here's the sidebar content. I can use the {{yml_variables}} and such.
 
+# License
+
+Milksteak is released under the MIT license and is copyright (c) 2012 Bryan Thompson    
