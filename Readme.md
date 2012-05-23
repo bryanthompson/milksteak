@@ -3,12 +3,7 @@ and keep it as far from anything like rails as possible, with minimum requiremen
 structure.  Expect the project to change rather dramatically as I add to it, feel free to fork and do whatever
 you like, and as always, pull requests are very welcome.  
 
-License
-
-Refinery is released under the MIT license and is copyright (c) 2005-2012 Resolve Digital
-Credits
-
-Many of the icons used in Refinery CMS are from the wonderful Silk library by Mark James.# Installation
+# Install
 
     gem install milksteak 
     gem 'milksteak' # if using bundler
