@@ -19,7 +19,7 @@ If you plan on using the Milksteak::Admin module, include it in your rack cascad
 There are several ways to use Milksteak for content management.  The simplest example would be to include an editable area on a random page.  Let's say we want some sidebar text to be editable.  
 
     # views/sidebar.erb
-    <%= Milksteak::Page.render("sidebar-content") %>
+    &lt;%= Milksteak::Page.render("sidebar-content") %&gt;
 
     # milk/pages/sidebar-content.yml
     ---
