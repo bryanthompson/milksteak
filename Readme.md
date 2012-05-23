@@ -40,6 +40,16 @@ text to be editable.
     
     Here's the sidebar content. I can use the {{yml_variables}} and such.
 
+# Roadmap
+
+* Blog/News engine
+* Photo galleries
+* Flexible collection types for data lists and content types (kinda hard to bullet-point intention here)
+* Support for storage back-ends rather than YML, if necessary
+* Tie into Tonic CMS (v3) API 
+* Dynamic page routes (currently pages are treated as content fragments)
+* ... Contact me with your requests and ideas, or fork and add your own
+
 # License
 
 Milksteak is released under the MIT license and is copyright (c) 2012 Bryan Thompson    
