@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Bryan Thompson"]
   s.email       = ["bryan.thompson@firespring.com"]
   s.homepage    = ""
-  s.summary     = %q{the cms that doesn't give a damn}
-  s.description = %q{really. it's just simple.}
+  s.summary     = %q{Super tiny and simple ruby-based cms}
+  s.description = %q{Super tiny and simple ruby-based cms that uses yml for content }
 
   s.rubyforge_project = "milksteak"
 
