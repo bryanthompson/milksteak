@@ -54,5 +54,7 @@ describe Milksteak::Page do
     File.unlink(File.join(File.dirname(__FILE__), "../fixtures/pages/scratch_page.yml"))
   end
 
-  it "should route pages using middleware"
+  it "should raise errors if trying to save without a route variable"
+  it "should process a collection variable and find appropriate fragment sets"
+
 end

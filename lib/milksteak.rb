@@ -1,7 +1,10 @@
 require "milksteak/version"
+require "milksteak/cms"
 require "sinatra/base"
 require "models/user"
+require "models/yml_content"
 require "models/page"
+require "models/fragment"
 require "liquid"
 require "bluecloth"
 
@@ -48,9 +51,26 @@ module Milksteak
         msgs.join
       end
     end
-    
-    get "/milksteak" do
-      erb "login", :layout => "admin"
+  
+    before '/ms-admin/?*' do
+
+      # note: it is your responsibility to manage users and login processes. Any
+      # reference milksteak uses to a user will be done through the value stored 
+      # in session[:ms_user]. It is best to store a string or integer that you can
+      # use on your own to reference the user.  This might change at some point to
+      # allowing you to put a Milksteak::User in this variable with predictable 
+      # fields that you could populate on login. That way, we can present user actions
+      # in an easy manner.
+ 
+      unless session[:ms_user]
+        flash[:error] = "You must be logged in to see this area."
+        redirect "/"
+      end
+
+    end    
+
+    get "/ms-admin" do
+      erb "admin", :layout => "admin"
     end
   end
 end

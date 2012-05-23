@@ -16,4 +16,7 @@ end
 
 Milksteak::Admin.set :milk_root, "/tmp/milk_site" 
 
-def app; Milksteak::Admin; end
+
+def app
+  Milksteak::Admin
+end

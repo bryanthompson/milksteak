@@ -1,5 +1,5 @@
 module Milksteak
-  module Cms
+  class Cms
     def initialize(app)
       @app = app
     end
@@ -9,7 +9,7 @@ module Milksteak
     end
 
     def _call(env)
-      puts "OK"
+      #puts "OK"
       @status, @headers, @response = @app.call(env)
       [@status, @headers, @response]
     end
