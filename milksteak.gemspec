@@ -24,6 +24,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency "guard-rspec"
   s.add_development_dependency "webmock"
   s.add_development_dependency "rack-test"
-  s.add_runtime_dependency "tonic-cms"
+
+  #going to a simple flat-file storage for now
+  #s.add_runtime_dependency "tonic-cms"
+ 
+  s.add_runtime_dependency "kyoto_record"
+ 
   s.add_runtime_dependency "sinatra"
 end

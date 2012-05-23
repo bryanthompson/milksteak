@@ -1,5 +1,6 @@
 require "milksteak/version"
 require "sinatra/base"
+require "models/user"
 
 module Milksteak
   class Admin < Sinatra::Base
@@ -45,10 +46,8 @@ module Milksteak
       end
     end
     
-    
-    
     get "/milksteak" do
-      erb "ok", :layout => "admin"
+      erb "login", :layout => "admin"
     end
   end
 end
