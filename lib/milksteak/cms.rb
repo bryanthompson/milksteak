@@ -70,14 +70,13 @@ module Milksteak
     end
   
     def _call(env)
-      @status, @headers, @response = @app.call(env)
-
       if match = route(env["PATH_INFO"])
         @response = [match[:page].render]
-        @headers["Content-Length"] = @response[0].bytesize.to_s
+        [200, {"Content-Type" => "text/html", "Content-Length" => @response[0].bytesize.to_s}, @response]
+      else    
+        @status, @headers, @response = @app.call(env)
+        [@status, @headers, @response]
       end
-
-      [@status, @headers, @response]
     end
   end
   
