@@ -70,7 +70,8 @@ module Milksteak
     end
   
     def _call(env)
-      if match = route(env["PATH_INFO"])
+      if match = route(env["PATH_INFO"]) and match[:page]
+puts match.inspect
         @response = [match[:page].render]
         [200, {"Content-Type" => "text/html", "Content-Length" => @response[0].bytesize.to_s}, @response]
       else    
