@@ -40,8 +40,7 @@ module Milksteak
     def self.render(name)
       begin
         p = self.load(name, "r")
-        rendered = Liquid::Template.parse(p.content).render(p.data)
-        BlueCloth.new(rendered).to_html
+        p.render
       rescue Errno::ENOENT => e
         ""
       end
@@ -73,7 +72,16 @@ module Milksteak
     # todo: test
     def render
       rendered = Liquid::Template.parse(self.content).render(self.data)
-      BlueCloth.new(rendered).to_html
+      if self.data["layout"]
+        layout = Milksteak::Layout.load(self.data["layout"])
+        data = layout.data.merge("yield" => rendered)
+        rendered = Liquid::Template.parse(layout.content).render(data)
+      end
+      if self.data["format"]
+        BlueCloth.new(rendered).to_html if self.data["format"] == "markdown"
+      else
+        rendered
+      end
     end
   end
 end

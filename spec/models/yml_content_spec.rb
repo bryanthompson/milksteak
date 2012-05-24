@@ -37,11 +37,19 @@ describe TestYmlObject do
     File.unlink(File.join(File.dirname(__FILE__), "../fixtures/objs/scratch_obj.yml"))
   end
 
-  it "should render obj content" do
+  it "should render obj content plain by default" do
     f = File.open(File.join(File.dirname(__FILE__), "../fixtures/objs/sample_obj.yml"), "r")
     File.should_receive(:new).with("/tmp/milk_site/objs/home.yml", "r").and_return f
     content = TestYmlObject.render("home")
-    content.should == "<p>This is a Test Object</p>"
+    content.should == "This is a Test Object\n"
+  end
+
+  it "should render obj as markdown when specified as format" do
+    f = File.open(File.join(File.dirname(__FILE__), "../fixtures/objs/sample_obj.yml"), "r")
+    File.should_receive(:new).with("/tmp/milk_site/objs/home.yml", "r").and_return f
+    obj = TestYmlObject.load("home")
+    obj.data["format"] = "markdown"
+    obj.render.should == "<p>This is a Test Object</p>"
   end
 
   it "should return empty string if trying to render a obj that doesn't exist" do

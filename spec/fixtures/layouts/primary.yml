@@ -1,0 +1,9 @@
+---
+---
+
+HEADER
+
+{{ yield }}
+
+FOOTER
+

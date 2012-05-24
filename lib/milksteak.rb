@@ -5,6 +5,7 @@ require "milksteak/liquid_helpers"
 require "sinatra/base"
 require "models/user"
 require "models/yml_content"
+require "models/layout"
 require "models/page"
 require "models/fragment"
 require "bluecloth"
@@ -54,7 +55,6 @@ module Milksteak
     end
   
     before '/ms-admin/?*' do
-
       # note: it is your responsibility to manage users and login processes. Any
       # reference milksteak uses to a user will be done through the value stored 
       # in session[:ms_user]. It is best to store a string or integer that you can
@@ -67,7 +67,6 @@ module Milksteak
         flash[:error] = "You must be logged in to see this area."
         redirect "/"
       end
-
     end    
 
     get "/ms-admin" do
