@@ -4,7 +4,7 @@ module Milksteak
 
     def self.list
       milk_root = Milksteak::Admin.milk_root
-      page_dir = File.join(Milksteak::Admin.milk_root, self.folder)
+      page_dir = File.join(Milksteak::Admin.milk_root, folder)
       FileUtils.mkdir(milk_root) unless File.exist? milk_root
       FileUtils.mkdir(page_dir) unless File.exist? page_dir
       Dir.glob("#{page_dir}/*.yml")
@@ -13,7 +13,7 @@ module Milksteak
     # loads a page from yaml, sets data and content attributes, returns a Milksteak::Page
     def self.load(name, mode = "r")
       milk_root = Milksteak::Admin.milk_root
-      page_dir = File.join(Milksteak::Admin.milk_root, self.folder)
+      page_dir = File.join(Milksteak::Admin.milk_root, folder)
       FileUtils.mkdir(milk_root) unless File.exist? milk_root
       FileUtils.mkdir(page_dir) unless File.exist? page_dir
 
@@ -68,6 +68,12 @@ module Milksteak
         puts "YAML Exception reading #{name}: #{e.message}"
       end
       self.data ||= {}
+    end
+    
+    # todo: test
+    def render
+      rendered = Liquid::Template.parse(self.content).render(self.data)
+      BlueCloth.new(rendered).to_html
     end
   end
 end

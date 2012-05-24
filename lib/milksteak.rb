@@ -1,11 +1,12 @@
+require "liquid"
 require "milksteak/version"
 require "milksteak/cms"
+require "milksteak/liquid_helpers"
 require "sinatra/base"
 require "models/user"
 require "models/yml_content"
 require "models/page"
 require "models/fragment"
-require "liquid"
 require "bluecloth"
 
 module Milksteak
