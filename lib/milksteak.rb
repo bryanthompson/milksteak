@@ -8,7 +8,7 @@ require "models/yml_content"
 require "models/layout"
 require "models/page"
 require "models/fragment"
-require "bluecloth"
+require "rdiscount"
 
 module Milksteak
   class Admin < Sinatra::Base

@@ -56,7 +56,7 @@ describe TestYmlObject do
     File.should_receive(:new).with("/tmp/milk_site/objs/home.yml", "r").and_return f
     obj = TestYmlObject.load("home")
     obj.data["format"] = "markdown"
-    obj.render.should == "<p>This is a Test Object</p>"
+    obj.render.should == "<p>This is a Test Object</p>\n"
   end
 
   it "should return empty string if trying to render a obj that doesn't exist" do

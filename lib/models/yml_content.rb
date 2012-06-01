@@ -74,7 +74,7 @@ module Milksteak
       rendered = Liquid::Template.parse(self.content).render(self.data.merge("params" => params))
 
       if self.data["format"]
-        rendered = BlueCloth.new(rendered).to_html if self.data["format"] == "markdown"
+        rendered = RDiscount.new(rendered).to_html if self.data["format"] == "markdown"
       end
 
       if self.data["layout"]
