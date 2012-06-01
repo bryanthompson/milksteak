@@ -72,16 +72,18 @@ module Milksteak
     # todo: test
     def render(params = {})
       rendered = Liquid::Template.parse(self.content).render(self.data.merge("params" => params))
+
+      if self.data["format"]
+        rendered = BlueCloth.new(rendered).to_html if self.data["format"] == "markdown"
+      end
+
       if self.data["layout"]
         layout = Milksteak::Layout.load(self.data["layout"])
         data = layout.data.merge("yield" => rendered, "params" => params)
         rendered = Liquid::Template.parse(layout.content).render(data)
       end
-      if self.data["format"]
-        BlueCloth.new(rendered).to_html if self.data["format"] == "markdown"
-      else
-        rendered
-      end
+
+      return rendered
     end
   end
 end
