@@ -37,10 +37,10 @@ module Milksteak
       p
     end  
   
-    def self.render(name)
+    def self.render(name, params = {})
       begin
         p = self.load(name, "r")
-        p.render
+        p.render(params)
       rescue Errno::ENOENT => e
         ""
       end
@@ -70,11 +70,11 @@ module Milksteak
     end
     
     # todo: test
-    def render
-      rendered = Liquid::Template.parse(self.content).render(self.data)
+    def render(params = {})
+      rendered = Liquid::Template.parse(self.content).render(self.data.merge("params" => params))
       if self.data["layout"]
         layout = Milksteak::Layout.load(self.data["layout"])
-        data = layout.data.merge("yield" => rendered)
+        data = layout.data.merge("yield" => rendered, "params" => params)
         rendered = Liquid::Template.parse(layout.content).render(data)
       end
       if self.data["format"]

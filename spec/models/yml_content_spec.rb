@@ -44,6 +44,13 @@ describe TestYmlObject do
     content.should == "This is a Test Object\n"
   end
 
+  it "should accept additional params for rendering" do
+    f = File.open(File.join(File.dirname(__FILE__), "../fixtures/objs/sample_obj_with_params.yml"), "r")
+    File.should_receive(:new).with("/tmp/milk_site/objs/home.yml", "r").and_return f
+    content = TestYmlObject.render("home", {:foo => "This is from params."})
+    content.should == "This is a Test Object.  This is from params.\n"
+  end
+
   it "should render obj as markdown when specified as format" do
     f = File.open(File.join(File.dirname(__FILE__), "../fixtures/objs/sample_obj.yml"), "r")
     File.should_receive(:new).with("/tmp/milk_site/objs/home.yml", "r").and_return f
