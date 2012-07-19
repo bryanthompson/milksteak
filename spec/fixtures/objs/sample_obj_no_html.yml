@@ -1,0 +1,7 @@
+---
+description: Test Object
+format: markdown
+allow_html: false
+---
+
+<strong>This is</strong> _a_ {{description}}

@@ -15,7 +15,7 @@ describe TestYmlObject do
   it "should get list of objs from milk_root/objs" do
     TestYmlObject.list.should be_an Array
   end
- 
+
   # this utility method is used by the read and write methods as a consistent
   # way to access yml obj documents.   
   it "should load a obj into params" do
@@ -57,6 +57,13 @@ describe TestYmlObject do
     obj = TestYmlObject.load("home")
     obj.data["format"] = "markdown"
     obj.render.should == "<p>This is a Test Object</p>\n"
+  end
+
+  it "should respect allow_html variable in yaml frontmatter" do
+    f = File.open(File.join(File.dirname(__FILE__), "../fixtures/objs/sample_obj_no_html.yml"), "r")
+    File.should_receive(:new).with("/tmp/milk_site/objs/home.yml", "r").and_return f
+    obj = TestYmlObject.load("home")
+    obj.render.should == "<p>&lt;strong>This is&lt;/strong> <em>a</em> Test Object</p>\n"
   end
 
   it "should return empty string if trying to render a obj that doesn't exist" do

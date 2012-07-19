@@ -74,7 +74,13 @@ module Milksteak
       rendered = Liquid::Template.parse(self.content).render(self.data.merge("params" => params))
 
       if self.data["format"]
-        rendered = RDiscount.new(rendered).to_html if self.data["format"] == "markdown"
+        if self.data["format"] == "markdown"
+          if !self.data["allow_html"].nil? and self.data["allow_html"] == false
+            rendered = RDiscount.new(rendered, :filter_html, :smart).to_html 
+          else
+            rendered = RDiscount.new(rendered, :smart).to_html 
+          end
+        end
       end
 
       if self.data["layout"]
