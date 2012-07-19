@@ -65,12 +65,17 @@ module Milksteak
  
       unless session[:ms_user]
         flash[:error] = "You must be logged in to see this area."
-        redirect "/"
+        redirect "/ms-admin/login" unless request.path_info == "/ms-admin/login"
       end
     end    
 
     get "/ms-admin" do
       erb "admin", :layout => "admin"
     end
+    
+    get "/ms-admin/login" do
+      return "asdf"
+    end
+
   end
 end

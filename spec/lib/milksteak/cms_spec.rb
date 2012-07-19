@@ -9,8 +9,14 @@ describe Milksteak do
     it "should redirect to / from /ms-admin" do
       get "/ms-admin"
       last_response.status.should == 302
+      (last_response.header["Location"] =~ /\/ms\-admin\/login/).should_not be_nil
       get "/ms-admin/"
       last_response.status.should == 302
+      (last_response.header["Location"] =~ /\/ms\-admin\/login/).should_not be_nil
+    end
+    it "should not redirect /ms-admin/login" do
+      get "/ms-admin/login"
+      last_response.status.should == 200
     end
   end
 
