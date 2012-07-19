@@ -31,5 +31,4 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "liquid"
   s.add_runtime_dependency "rdiscount" # using RDiscount for more advanced Markdown 
   s.add_runtime_dependency "sinatra"
-  s.add_runtime_dependency "document_mapper"
 end
