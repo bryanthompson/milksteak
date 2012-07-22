@@ -70,11 +70,29 @@ module Milksteak
     end    
 
     get "/ms-admin" do
+      @fragments = Milksteak::Fragment.list
       erb "admin", :layout => "admin"
     end
-    
+
+    # fragment editing  
+    get "/ms-admin/fragments/:stub/edit" do
+      @fragment = Milksteak::Fragment.load(params[:stub])
+      erb "admin/fragments/edit", :layout => "admin"
+    end
+    post "/ms-admin/fragments/:stub/update" do
+      flash[:success] = "Section content updated successfully."
+      @fragment = Milksteak::Fragment.load(params[:stub])  
+      @fragment = Milksteak::Fragment.write(params[:stub], @fragment.data, params[:page][:content])
+      erb "admin/fragments/edit", :layout => "admin"
+    end   
+
     get "/ms-admin/login" do
-      return "asdf"
+      erb "admin/login", :layout => "admin"
+    end
+
+    get "/ms-admin/app.js" do
+      content_type :js
+      coffee "app"
     end
 
   end

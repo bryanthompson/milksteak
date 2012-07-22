@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h1>Editing Content Section <small><%= @fragment.name %></small></h1>
+</div>
+
+<form action="/ms-admin/fragments/<%= @fragment.name %>/update" method="post">
+<textarea id="textile" class="markitup" cols="800" rows="20" name="page[content]"><%= RDiscount.new(@fragment.content, :filter_html, :smart).text.gsub("&", "&amp;").gsub("<", "&lt;") %></textarea>
+<p><input type="submit" value="Publish Changes" class="btn btn-primary" /> </p>
+</form>

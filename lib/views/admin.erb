@@ -1,5 +1,26 @@
-<h1>Admin</h1>
+<div class="page-heading">
+  <h1>Admin</h1>
+</div>
 
-<p>
-  Note, Milksteak is still very much beta. 
-</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="span7">Section Name</th><th>Size</th><th>Updated Date</th><th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @fragments.each do |p| %>
+      <% name = p.match(/^.+\/(.+)\.yml/)[1] %>
+      <tr>
+        <td><%= name %></td>
+        <td><%= File.size(p) %></td>
+        <td><%= File.mtime(p).getlocal %></td>
+        <td>
+          <div class="pull-right btn-group">
+            <a href="/ms-admin/fragments/<%= name %>/edit" class="btn btn-small"><i class="icon-pencil"></i></a>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>   
+</table>
