@@ -93,7 +93,7 @@ puts match.inspect
       @length = page.data["route"].length
       @page = page
       @pattern = build_expression(page.data["route"])
-      super
+      super()
     end 
     
     private
