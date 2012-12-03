@@ -15,7 +15,7 @@ RSpec.configure do |config|
 end
 
 Milksteak::Admin.set :milk_root, "/tmp/milk_site" 
-
+Milksteak::Admin.set :site_id, SecureRandom.hex(6)
 
 def app
   Milksteak::Admin

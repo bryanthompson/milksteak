@@ -1,8 +1,9 @@
 require File.join(File.dirname(__FILE__), "../../spec_helper.rb")
 
 describe Milksteak do
-  it "should have milk_root settings" do
+  it "should have milk_root and site_id settings" do
     Milksteak::Admin.milk_root.should_not be_nil
+    Milksteak::Admin.site_id.should_not be_nil
   end
   
   context "non-logged-in visitors" do
